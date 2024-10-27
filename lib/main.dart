@@ -1,7 +1,4 @@
-import 'package:expenses/components/TransactionsForm.dart';
 import 'package:expenses/components/TransactionsUser.dart';
-import 'package:expenses/components/TransactionsList.dart';
-import 'package:expenses/models/Transactions.dart';
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
