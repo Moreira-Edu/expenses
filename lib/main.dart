@@ -1,6 +1,6 @@
+import 'package:expenses/components/TranscationsLists.dart';
 import 'package:expenses/models/Transactions.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main(List<String> args) {
   runApp(const ExpensesApp());
@@ -19,7 +19,8 @@ class ExpensesApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
-
+  final title = TextEditingController();
+  final value = TextEditingController();
   final _transactions = [
     Transactions(
       id: '124',
@@ -49,70 +50,29 @@ class MyHomePage extends StatelessWidget {
             child: Text('Gráfico'),
             elevation: 5,
           ),
-          Column(
-            children: _transactions.map((transaction) {
-              return Card(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.purple,
-                          width: 2,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(10),
-                      child: Text(
-                        'R\$ ${transaction.value.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.purple,
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          transaction.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          DateFormat('d MMM y').format(transaction.date),
-                          style: const TextStyle(color: Colors.blueGrey),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          TransactionsList(_transactions),
           Card(
             elevation: 5,
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: <Widget>[
-                  const TextField(
-                    decoration: InputDecoration(labelText: 'Título'),
+                  TextField(
+                    controller: title,
+                    decoration: const InputDecoration(labelText: 'Título'),
                   ),
-                  const TextField(
-                    decoration: InputDecoration(labelText: 'Valor (R\$)'),
+                  TextField(
+                    controller: value,
+                    decoration: const InputDecoration(labelText: 'Valor (R\$)'),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print(title);
+                          print(value);
+                        },
                         child: const Text(
                           'Nova Transação',
                           style: TextStyle(color: Colors.purple),
